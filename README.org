@@ -1,0 +1,29 @@
+#+title: Compdb
+#+author: James Leslie
+This is a nix flake for [[https://github.com/Sarcasm/compdb][compdb]], the compilation database Swiss army knife. You can use this in your flake by adding it as an input:
+#+begin_src nix
+inputs.compdb.url = github:jeslie0/compdb;
+#+end_src
+
+To add it to your system, put the following in your configuration.nix:
+#+begin_src nix
+environment.systemPackages = [
+  ...
+  self.inputs.compdb.packages.${system}.default
+  ...
+];
+#+end_src
+
+* Usage
+Following from compdb's documentation, to generate a new compilation database containing header files, run the following at the top level of your project:
+#+begin_src bash
+compdb -p build/ list > compile_commands.json
+#+end_src
+
+* License
+This project is licensed under the MIT License. See [[./LICENSE][LICENSE]] for details
+
+* Acknowledgements
+- [[https://blog.hackeriet.no/packaging-python-script-for-nixos/][hackeriet]]: for the instructions on packaging python code with nix;
+- compdb: for the very useful project!
+#  LocalWords:  compdb's Compdb
